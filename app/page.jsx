@@ -7,7 +7,7 @@ import { Sidebar } from '@/components/Sidebar'
 
 export default function Home() {
   const [input, setInput] = useState('')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // default closed on mobile
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -49,26 +49,27 @@ export default function Home() {
   return (
     <div className="flex h-screen bg-black overflow-hidden">
 
-      {/* ── Sidebar ── */}
-      {sidebarOpen && (
+      {/* ── Sidebar (Hidden on mobile unless open) ── */}
+      <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block h-full z-50`}>
         <Sidebar
           onTopicSelect={handleTopicSelect}
           onClear={clearChat}
           messageCount={messages.length}
+          onClose={() => setSidebarOpen(false)}
         />
-      )}
+      </div>
 
       {/* ── Main chat area ── */}
       <main className="flex flex-col flex-1 min-w-0 h-full">
 
         {/* Top bar */}
-        <header className="flex items-center justify-between px-6 py-4
-                            border-b border-[var(--border)] bg-black flex-shrink-0">
-          <div className="flex items-center gap-4">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-4
+                            border-b border-[var(--border)] bg-black flex-shrink-0 gap-4 sm:gap-0">
+          <div className="flex items-center gap-3 sm:gap-4">
             {/* Sidebar toggle */}
             <button
               onClick={() => setSidebarOpen(v => !v)}
-              className="w-8 h-8 flex flex-col items-center justify-center gap-1.5
+              className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5
                          rounded-lg hover:bg-[var(--blue-dim)] transition-colors"
               aria-label="Toggle sidebar"
             >
@@ -112,8 +113,7 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Messages area */}
-        <div className="flex-1 overflow-y-auto chat-scroll px-6 py-6 space-y-5">
+        <div className="flex-1 overflow-y-auto chat-scroll px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-5 shadow-inner">
 
           {/* Empty state */}
           {messages.length === 0 && (
@@ -172,8 +172,7 @@ export default function Home() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input bar */}
-        <div className="px-6 pb-6 pt-3 flex-shrink-0 border-t border-[var(--border)] bg-black">
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 flex-shrink-0 border-t border-[var(--border)] bg-black">
 
           {/* Stats bar */}
           <div className="flex items-center gap-4 mb-3">
