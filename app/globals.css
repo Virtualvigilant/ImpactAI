@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --blue:       #306CEC;
+    --blue-dim:   rgba(48, 108, 236, 0.12);
+    --blue-glow:  rgba(48, 108, 236, 0.3);
+    --off-white:  #FFFEF9;
+    --black:      #000000;
+    --dark:       #06090F;
+    --card:       #0A0F1C;
+    --border:     rgba(48, 108, 236, 0.18);
+    --muted:      rgba(255, 254, 249, 0.4);
+    --soft:       rgba(255, 254, 249, 0.7);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    background-color: #000000;
+    color: #FFFEF9;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar        { width: 4px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: rgba(48,108,236,0.3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(48,108,236,0.5); }
+
+  /* Smooth scrolling in chat */
+  .chat-scroll { scroll-behavior: smooth; }
+}
+
+@layer components {
+  /* ── Brand button ── */
+  .btn-primary {
+    @apply bg-brand-blue text-brand-off-white font-spartan font-bold
+           text-sm tracking-widest uppercase px-6 py-3 rounded-xl
+           hover:bg-blue-500 active:scale-95 transition-all duration-150;
+  }
+
+  /* ── Input ── */
+  .chat-input {
+    @apply w-full bg-brand-card border border-[var(--border)] rounded-2xl
+           px-5 py-3 text-sm text-brand-off-white placeholder-[var(--muted)]
+           font-sans focus:outline-none focus:border-brand-blue
+           transition-colors duration-200 resize-none;
+  }
+
+  /* ── Message bubbles ── */
+  .bubble-ai {
+    @apply bg-[rgba(48,108,236,0.08)] border border-[rgba(48,108,236,0.15)]
+           text-brand-off-white rounded-2xl rounded-bl-sm px-4 py-3
+           text-sm leading-relaxed font-light max-w-[82%];
+  }
+
+  .bubble-user {
+    @apply bg-brand-blue text-brand-off-white
+           rounded-2xl rounded-br-sm px-4 py-3
+           text-sm leading-relaxed max-w-[82%];
+  }
+
+  /* ── Status chip ── */
+  .status-chip {
+    @apply inline-flex items-center gap-2 bg-[var(--blue-dim)]
+           border border-[var(--border)] text-brand-blue
+           text-[10px] font-semibold tracking-widest uppercase
+           px-3 py-1.5 rounded-full;
+  }
+
+  /* ── Section label ── */
+  .sec-label {
+    @apply font-spartan font-bold text-[9px] tracking-[2px] uppercase
+           text-[var(--muted)];
+  }
+}
+
+/* ── Glow effects ── */
+.glow-blue {
+  box-shadow: 0 0 40px rgba(48, 108, 236, 0.15);
+}
+
+.glow-blue-sm {
+  box-shadow: 0 0 20px rgba(48, 108, 236, 0.1);
+}
+
+/* ── Typing dots ── */
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--blue);
+  opacity: 0.4;
+}
+
+.typing-dot:nth-child(1) { animation: bop 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation: bop 1.2s ease-in-out 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: bop 1.2s ease-in-out 0.4s infinite; }
+
+@keyframes bop {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ── Prose in AI messages (markdown-ish) ── */
+.ai-content p   { margin-bottom: 0.5rem; }
+.ai-content p:last-child { margin-bottom: 0; }
+.ai-content ul  { list-style: disc; padding-left: 1.2rem; margin-bottom: 0.5rem; }
+.ai-content ol  { list-style: decimal; padding-left: 1.2rem; margin-bottom: 0.5rem; }
+.ai-content li  { margin-bottom: 0.2rem; }
+.ai-content strong { color: var(--off-white); font-weight: 600; }
+.ai-content code {
+  background: rgba(48,108,236,0.15);
+  border: 1px solid rgba(48,108,236,0.2);
+  padding: 1px 6px; border-radius: 4px;
+  font-size: 0.85em; font-family: 'Courier New', monospace;
+}
+.ai-content pre {
+  background: rgba(48,108,236,0.08);
+  border: 1px solid rgba(48,108,236,0.18);
+  padding: 12px 14px; border-radius: 10px;
+  overflow-x: auto; margin: 8px 0;
+  font-size: 0.8em; font-family: 'Courier New', monospace;
+}
+.ai-content pre code { background: none; border: none; padding: 0; }
