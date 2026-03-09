@@ -1,5 +1,6 @@
 'use client'
 // components/Sidebar.jsx
+import logoImage from '@/logo4.png'
 
 const TOPICS = [
   { emoji: '🌾', label: 'Agriculture', sub: 'Crops, pests, weather' },
@@ -31,7 +32,7 @@ export function Sidebar({ onTopicSelect, onClear, messageCount, onClose }) {
           <div className="flex items-center gap-3 mb-1">
             {/* ImpactAI logo mark */}
             <div className="w-9 h-9 rounded-[10px] overflow-hidden flex-shrink-0">
-              <img src="/api/logo.png" alt="ImpactAI Logo" className="w-full h-full object-cover" />
+              <img src={logoImage.src} alt="ImpactAI Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <p className="font-spartan font-bold text-sm text-brand-off-white tracking-widest uppercase leading-none">

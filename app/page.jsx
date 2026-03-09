@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useLMStudio } from '@/lib/useLMStudio'
 import { MessageBubble } from '@/components/MessageBubble'
 import { Sidebar } from '@/components/Sidebar'
+import logoImage from '@/logo4.png'
 
 export default function Home() {
   const [input, setInput] = useState('')
@@ -122,7 +123,7 @@ export default function Home() {
 
               {/* Decorative star */}
               <div className="mb-8 relative">
-                <img src="/api/logo.png" alt="ImpactAI Logo" className="w-24 h-24 rounded-3xl shadow-xl shadow-brand-blue/10 border border-[var(--border)] object-cover bg-black" />
+                <img src={logoImage.src} alt="ImpactAI Logo" className="w-24 h-24 rounded-3xl shadow-xl shadow-brand-blue/10 border border-[var(--border)] object-cover bg-black" />
                 {/* Sparkle stars */}
                 <div className="absolute -top-2 -right-2">
                   <svg width="14" height="14" viewBox="0 0 14 14">
